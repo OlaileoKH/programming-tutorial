@@ -12,6 +12,7 @@ export default function RootLayout({
       <head><title>Programming with Olaileo</title></head>
       <body>
     <Header title={title}></Header>
+    <br></br>
         <main className="pt-20 p-4">{children}</main>
       </body>
     </html>
