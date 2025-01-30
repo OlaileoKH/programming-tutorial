@@ -1,18 +1,35 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
+import typography from '@tailwindcss/typography'; // Import as ES module
 
-export default {
+const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    // Add any other paths you need
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      typography: {
+        DEFAULT: {
+          css: {
+            pre: {
+              backgroundColor: '#1e1e1e',
+              padding: '0',
+              borderRadius: '0.5rem',
+              overflow: 'hidden',
+            },
+          },
+        },
+      },
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },
   },
-  plugins: [],
-} satisfies Config;
+  plugins: [
+    typography, // Use the imported module
+    // Add other plugins here as imports
+  ],
+};
+
+export default config;
