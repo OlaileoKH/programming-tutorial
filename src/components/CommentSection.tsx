@@ -6,27 +6,61 @@ import { Comment } from '@/types/comment';
 import { User } from '@supabase/supabase-js';
 
 export default function CommentSection() {
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useState<Record<string, Comment[]>>({});
   const [newComment, setNewComment] = useState('');
   const [user, setUser] = useState<User | null>(null);
   const [commentType, setCommentType] = useState<'authenticated' | 'guest'>('guest');
   const [guestName, setGuestName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
+  const [replyContent, setReplyContent] = useState('');
+  const [expandedReplies, setExpandedReplies] = useState<Record<string, boolean>>({});
 
   const fetchComments = async () => {
-    const { data, error } = await supabase
+    const { data: commentsData, error } = await supabase
       .from('comments')
-      .select('*')
+      .select(`
+        id, content, guest_name, created_at, parent_id, user_id, likes,
+        profiles (username)
+      `)
       .order('created_at', { ascending: false });
 
     if (error) {
-      console.error('Error fetching comments:', error);
-    } else {
-      setComments(data || []);
+      console.error('Error fetching comments:', error.message);
+      return;
     }
+
+    // Ensure that `profiles` is a single object instead of an array
+    const formattedComments = (commentsData || []).map((comment) => ({
+      ...comment,
+      profiles: Array.isArray(comment.profiles) ? comment.profiles[0] : comment.profiles,
+    })) as Comment[];
+
+    // Group comments into a dictionary
+    const groupedComments: Record<string, Comment[]> = {};
+
+    formattedComments.forEach((comment) => {
+      if (comment.parent_id) {
+        // This is a reply, group it under its parent comment
+        if (!groupedComments[comment.parent_id]) {
+          groupedComments[comment.parent_id] = [];
+        }
+        groupedComments[comment.parent_id].push(comment);
+      } else {
+        // This is a top-level comment, group it under its own ID
+        if (!groupedComments[comment.id]) {
+          groupedComments[comment.id] = [];
+        }
+        groupedComments[comment.id].unshift(comment);
+      }
+    });
+
+    // Update the state with the grouped comments
+    setComments(groupedComments);
   };
 
   const postComment = async () => {
@@ -79,25 +113,37 @@ export default function CommentSection() {
   };
 
   const handleSignUp = async () => {
-    if (!email.trim() || !password.trim()) {
-      alert('Please enter your email and password.');
+    if (!email.trim() || !password.trim() || !username.trim()) {
+      alert('Please fill in all fields.');
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
     });
 
-    if (error) {
-      console.error('Sign-up error:', error);
-      alert(`Sign-up failed: ${error.message}`);
-    } else {
-      console.log('User signed up successfully:', data.user);
-      alert('Sign-up successful! Please check your email to confirm your account.');
-      setEmail('');
-      setPassword('');
+    if (signUpError) {
+      console.error('Sign-up error:', signUpError);
+      alert(`Sign-up failed: ${signUpError.message}`);
+      return;
     }
+
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .insert([{ id: signUpData.user?.id, username }]);
+
+    if (profileError) {
+      console.error('Profile creation error:', profileError);
+      alert('Username is already taken. Please choose another one.');
+      return;
+    }
+
+    console.log('User signed up and profile created successfully:', signUpData.user);
+    alert('Sign-up successful! Please check your email to confirm your account.');
+    setEmail('');
+    setPassword('');
+    setUsername('');
   };
 
   const handleLogout = async () => {
@@ -105,21 +151,47 @@ export default function CommentSection() {
     setUser(null);
   };
 
-  const refreshSession = async () => {
-    const { data, error } = await supabase.auth.refreshSession();
+  const handleReply = async (parentId: string) => {
+    if (!replyContent.trim()) {
+      alert('Reply cannot be empty.');
+      return;
+    }
+
+    const { error } = await supabase
+      .from('comments')
+      .insert([{ content: replyContent, user_id: user?.id, parent_id: parentId }]);
+
     if (error) {
-      console.error('Error refreshing session:', error);
+      console.error('Error posting reply:', error);
     } else {
-      setUser(data.user);
+      setReplyContent('');
+      setReplyingTo(null);
+      fetchComments();
     }
   };
+
+  // const handleLike = async (commentId: string) => {
+  //   const comment = comments[commentId]?.[0]; // Get the main comment
+  //   if (!comment) return;
+
+  //   const currentLikes = comment.likes || 0; // Default to 0 if `likes` is undefined
+  //   const { error } = await supabase
+  //     .from('comments')
+  //     .update({ likes: currentLikes + 1 })
+  //     .eq('id', commentId);
+
+  //   if (error) {
+  //     console.error('Error liking comment:', error);
+  //   } else {
+  //     fetchComments();
+  //   }
+  // };
 
   useEffect(() => {
     const fetchUser = async () => {
       const { data: user, error } = await supabase.auth.getUser();
       if (error) {
         console.error('Error fetching user:', error);
-        await refreshSession(); // Refresh the session if the user is not found
       } else {
         setUser(user.user);
       }
@@ -209,6 +281,13 @@ export default function CommentSection() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
+                    className="w-full p-2 border rounded mb-2"
+                  />
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Username"
                     className="w-full p-2 border rounded mb-4"
                   />
                   <button
@@ -277,20 +356,78 @@ export default function CommentSection() {
       >
         Post
       </button>
+
+      {/* Updated Comment Rendering Logic */}
       <div className="mt-6 space-y-4">
-        {comments.map((comment) => (
-          <div key={comment.id} className="border p-4 rounded">
-            <p>{comment.content}</p>
-            <p className="text-sm text-gray-500">
-              Posted by{' '}
-              {comment.guest_name
-                ? `Guest: ${comment.guest_name}`
-                : `User: ${comment.user_id}`}{' '}
-              on {new Date(comment.created_at).toLocaleString()}
-            </p>
-          </div>
-        ))}
-      </div>
+        {Object.entries(comments).map(([commentId, commentList]) => (
+          <div key={commentId} className="border p-4 rounded">
+            {commentList.map((comment, index) => (
+              <div key={index}>
+                <p>{comment.content}</p>
+                <p className="text-sm text-gray-500">
+                  Posted by {comment.profiles?.username || comment.guest_name || 'Guest'} on{' '}
+                  {new Date(comment.created_at).toLocaleString()}
+                </p>
+
+                <button
+                  onClick={() => setReplyingTo(comment.id)}
+                  className="text-blue-600 hover:text-blue-800"
+                >
+                  Reply
+                </button>
+
+                {replyingTo === comment.id && (
+                  <div className="mt-2">
+                    <textarea
+                      value={replyContent}
+                      onChange={(e) => setReplyContent(e.target.value)}
+                      placeholder="Write a reply..."
+                      className="w-full p-2 border rounded mb-2"
+                    />
+                    <button
+                      onClick={() => handleReply(comment.id)}
+                      className="bg-blue-600 text-white px-4 py-2 rounded"
+                    >
+                      Post Reply
+                    </button>
+                  </div>
+                )}
+
+          {/* Expandable Replies */}
+          {comments[comment.id]?.length > 0 && (
+            <div className="mt-2 ml-6">
+              <button
+                onClick={() =>
+                  setExpandedReplies((prev) => ({
+                    ...prev,
+                    [comment.id]: !prev[comment.id],
+                  }))
+                }
+                className="text-gray-600 text-sm"
+              >
+                {expandedReplies[comment.id] ? 'Hide Replies' : 'View Replies'}
+              </button>
+
+              {expandedReplies[comment.id] && (
+                <div className="ml-4 mt-2 border-l-2 pl-2 space-y-2">
+                  {comments[comment.id].map((reply) => (
+                    <div key={reply.id} className="p-2 border rounded">
+                      <p>{reply.content}</p>
+                      <p className="text-sm text-gray-500">
+                        Replied by {reply.profiles?.username || reply.guest_name || 'Guest'} on{' '}
+                        {new Date(reply.created_at).toLocaleString()}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  ))}
+</div>
     </div>
   );
 }
