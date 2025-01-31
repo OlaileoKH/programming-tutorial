@@ -1,6 +1,7 @@
 import GoToTopButton from '@/components/button';
 import CodeBlock from '@/components/CodeBlock';
 import ExpandableSection from '@/components/ExpandableSection';
+import CommentSection from '@/components/CommentSection';
 export default function CppPage() {
   return (
     <div className="text-black font-mono">
@@ -404,7 +405,11 @@ int main() {
     </ExpandableSection> 
     <GoToTopButton />
     </ul> 
-     
+
+     <div>
+      {/* Your existing content */}
+      <CommentSection />
+    </div>
 </div>
 
   );
