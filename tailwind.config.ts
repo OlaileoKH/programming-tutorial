@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import defaultTheme from 'tailwindcss/defaultTheme';
+// import defaultTheme from 'tailwindcss/defaultTheme';
 import typography from '@tailwindcss/typography'; // Import as ES module
 
 const config: Config = {
@@ -9,20 +9,25 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      typography: {
-        DEFAULT: {
-          css: {
-            pre: {
-              backgroundColor: '#1e1e1e',
-              padding: '0',
-              borderRadius: '0.5rem',
-              overflow: 'hidden',
-            },
-          },
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'slide-in-left': {
+          '0%': { transform: 'translateX(-20px)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        'slide-in-right': {
+          '0%': { transform: 'translateX(20px)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         },
       },
-      fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      animation: {
+        'fade-in': 'fade-in 0.5s ease-out',
+        'fade-in-delay': 'fade-in 1s ease-out',
+        'slide-in-left': 'slide-in-left 0.5s ease-out',
+        'slide-in-right': 'slide-in-right 0.5s ease-out',
       },
     },
   },
