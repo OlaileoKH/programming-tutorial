@@ -225,7 +225,7 @@ export default function CppPage() {
                 <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">It allows you to store and manipulate data in your program.</li>
                 </ul>
         </li></ul>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-12 mr-12 list-disc">
             <li className="text-xl  mb-4"><b>Rules for Naming Variables:</b>
                 <ul className="ml-12 list-non">
                 <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">Variable names can contain letters, numbers, and underscores (_).</li>
@@ -238,7 +238,7 @@ export default function CppPage() {
         <hr className="my-4 border-t border-gray-500" />
 
         <h1 className="text-2xl  font-bold mb-4">2. Data Types</h1>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-12 mr-12 list-disc">
             <li className="text-xl  mb-4"><b>What is a Data Type?</b>
                 <ul className="ml-12 list-none">
                 <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full"> A data type defines the type of data a variable can hold.</li>
@@ -266,7 +266,7 @@ export default function CppPage() {
         <hr className="my-4 border-t border-gray-500" />
 
         <h1 className="text-2xl  font-bold mb-4">3. Basic Input/Output</h1>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-12 mr-12 list-disc">
             <li className="text-xl  mb-4"><b>Output with cout:</b>
                 <ul className="ml-12 list-none">
                 <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">Use cout (console output) to display data on the screen.</li>
@@ -294,6 +294,7 @@ cout << "You entered: " << num << endl;`}
 
         <h1 className="text-2xl  font-bold mb-4">4. Writing a Simple Program</h1>
         <br></br>
+        <div className="ml-12 mr-12">
         <ul className="text-xl">Let’s write a program that takes input from the user and displays it.</ul>
         <CodeBlock language="cpp"
                     code={`#include <iostream>
@@ -316,12 +317,12 @@ int main() {
 
     return 0;
 }`}
-                />
+                /></div>
         <hr className="my-4 border-t border-gray-500" />
 
         <h1 className="text-2xl  font-bold mb-4">5. Practice Exercises</h1>
         <br></br>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-12 mr-12 list-disc">
             <li className="text-xl  mb-4"><b>Exercise 1:</b> Write a program to calculate the sum of two numbers entered by the user.
                 
                 <CodeBlock language="cpp"
@@ -340,7 +341,7 @@ int main() {
                 
             </li>
         </ul>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-12 mr-12 list-disc">
             <li className="text-xl  mb-4"><b>Exercise 2:</b> Write a program to calculate the area of a rectangle.
                 
                 <CodeBlock language="cpp"
@@ -359,7 +360,7 @@ int main() {
                 
             </li>
         </ul>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-12 mr-12 list-disc">
             <li className="text-xl  mb-4"><b>Exercise 3:</b> Write a program to convert temperature from Celsius to Fahrenheit.
                 
                 <CodeBlock language="cpp"
@@ -382,7 +383,7 @@ int main() {
         <hr className="my-4 border-t border-gray-500" />  
 
         <h1 className="text-2xl  mb-4"><b>6. Key Takeaways</b></h1>
-            <ul className="ml-12 list-disc">
+            <ul className="ml-12 mr-12 list-disc">
             <div className=" mb-2 text-xl">
                 <li>Variables are used to store data in a program.</li>
                 <li>Data types define the type of data a variable can hold.</li>
@@ -393,7 +394,7 @@ int main() {
             <hr className="my-4 border-t border-gray-500" />   
 
             <h1 className="text-2xl  mb-4"><b>Homework</b></h1>
-            <ul className="ml-12 list-decimal">
+            <ul className="ml-12 mr-12 list-decimal">
             <div className=" mb-2 text-xl" >
                 <li>Write a program to calculate the area of a circle. (Hint: Use pi = 3.14159.)</li>
                 <li>Write a program to swap two numbers entered by the user. (Hint: Use a temporary variable.)</li>

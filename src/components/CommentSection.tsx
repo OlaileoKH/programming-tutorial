@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { Comment } from '@/types/comment';
 import { User } from '@supabase/supabase-js';
+import ExpandableSection from '@/components/ExpandableSection';
 
 export default function CommentSection() {
   const [comments, setComments] = useState<Record<string, Comment[]>>({});
@@ -24,25 +25,25 @@ export default function CommentSection() {
     const { data: commentsData, error } = await supabase
       .from('comments')
       .select(`
-        id, content, guest_name, created_at, parent_id, user_id, likes,
+        id, content, guest_name, created_at, parent_id, user_id, 
         profiles (username)
       `)
       .order('created_at', { ascending: false });
-
+  
     if (error) {
       console.error('Error fetching comments:', error.message);
       return;
     }
-
+  
     // Ensure that `profiles` is a single object instead of an array
     const formattedComments = (commentsData || []).map((comment) => ({
       ...comment,
       profiles: Array.isArray(comment.profiles) ? comment.profiles[0] : comment.profiles,
     })) as Comment[];
-
+  
     // Group comments into a dictionary
     const groupedComments: Record<string, Comment[]> = {};
-
+  
     formattedComments.forEach((comment) => {
       if (comment.parent_id) {
         // This is a reply, group it under its parent comment
@@ -58,7 +59,7 @@ export default function CommentSection() {
         groupedComments[comment.id].unshift(comment);
       }
     });
-
+  
     // Update the state with the grouped comments
     setComments(groupedComments);
   };
@@ -68,25 +69,25 @@ export default function CommentSection() {
       alert('Comment cannot be empty.');
       return;
     }
-
+  
     if (commentType === 'guest' && !guestName.trim()) {
       alert('Please enter your name.');
       return;
     }
-
+  
     if (commentType === 'authenticated' && !user) {
       alert('Please log in to comment.');
       return;
     }
-
+  
     const commentData = {
       content: newComment,
       user_id: commentType === 'authenticated' ? user?.id : null,
       guest_name: commentType === 'guest' ? guestName : null,
     };
-
+  
     const { error } = await supabase.from('comments').insert([commentData]);
-
+  
     if (error) {
       console.error('Error posting comment:', error);
     } else {
@@ -117,35 +118,38 @@ export default function CommentSection() {
       alert('Please fill in all fields.');
       return;
     }
-
+  
     const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
     });
-
+  
     if (signUpError) {
       console.error('Sign-up error:', signUpError);
       alert(`Sign-up failed: ${signUpError.message}`);
       return;
     }
-
-    const { error: profileError } = await supabase
-      .from('profiles')
-      .insert([{ id: signUpData.user?.id, username }]);
-
-    if (profileError) {
-      console.error('Profile creation error:', profileError);
-      alert('Username is already taken. Please choose another one.');
+  
+    if (!signUpData.user) {
+      alert('Sign-up successful, but failed to get user details. Try logging in.');
       return;
     }
-
+  
+    // Ensure user is stored in profiles table
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .insert([{ id: signUpData.user.id, username }]);
+  
+    if (profileError) {
+      console.error('Profile creation error:', profileError);
+      alert('Failed to create profile. Please try again.');
+      return;
+    }
+  
     console.log('User signed up and profile created successfully:', signUpData.user);
     alert('Sign-up successful! Please check your email to confirm your account.');
-    setEmail('');
-    setPassword('');
-    setUsername('');
   };
-
+   
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -202,6 +206,7 @@ export default function CommentSection() {
   }, []);
 
   return (
+  <div className="ml-12 mr-12">
     <div className="mt-8">
       <h2 className="text-xl font-bold mb-4">Community Discussion</h2>
       <div className="mb-4">
@@ -356,9 +361,10 @@ export default function CommentSection() {
       >
         Post
       </button>
-
-      {/* Updated Comment Rendering Logic */}
-      <div className="mt-6 space-y-4">
+      
+      <ExpandableSection title="Comments">
+        {/* Updated Comment Rendering Logic */}
+      <div className="mt-6 ml-12 space-y-4">
         {Object.entries(comments).map(([commentId, commentList]) => (
           <div key={commentId} className="border p-4 rounded">
             {commentList.map((comment, index) => (
@@ -428,6 +434,8 @@ export default function CommentSection() {
     </div>
   ))}
 </div>
+      </ExpandableSection>
+      </div>
     </div>
   );
 }
