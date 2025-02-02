@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabaseClient';
 import { Comment } from '@/types/comment';
 import { User } from '@supabase/supabase-js';
 import ExpandableSection from '@/components/ExpandableSection';
+import { formatDistanceToNow } from 'date-fns';
 
 export default function CommentSection() {
   const [comments, setComments] = useState<Record<string, Comment[]>>({});
@@ -160,13 +161,32 @@ export default function CommentSection() {
       alert('Reply cannot be empty.');
       return;
     }
-
+  
+    // Check if parent comment exists
+    const { data: parentComment, error: parentError } = await supabase
+      .from('comments')
+      .select('id')
+      .eq('id', parentId)
+      .single();
+  
+    if (parentError || !parentComment) {
+      alert('Error: Parent comment does not exist.');
+      return;
+    }
+  
+    // Insert reply
     const { error } = await supabase
       .from('comments')
-      .insert([{ content: replyContent, user_id: user?.id, parent_id: parentId }]);
-
+      .insert([{ 
+        content: replyContent, 
+        user_id: user?.id || null, 
+        guest_name: commentType === 'guest' ? guestName : null, 
+        parent_id: parentId
+      }]);
+  
     if (error) {
       console.error('Error posting reply:', error);
+      alert(`Error posting reply: ${error.message}`);
     } else {
       setReplyContent('');
       setReplyingTo(null);
@@ -174,6 +194,21 @@ export default function CommentSection() {
     }
   };
 
+
+const formatTimestamp = (timestamp?: string) => {
+  if (!timestamp) return "Invalid date";
+
+  const utcDate = new Date(timestamp); // Supabase stores timestamps in UTC
+  if (isNaN(utcDate.getTime())) return "Invalid date";
+
+  // Convert UTC to IST (UTC+5:30)
+  const istDate = new Date(utcDate.getTime() + 5.5 * 60 * 60 * 1000);
+
+  return formatDistanceToNow(istDate, { addSuffix: true }); // Example: "5 minutes ago"
+};
+
+  
+  
   // const handleLike = async (commentId: string) => {
   //   const comment = comments[commentId]?.[0]; // Get the main comment
   //   if (!comment) return;
@@ -371,9 +406,10 @@ export default function CommentSection() {
               <div key={index}>
                 <p>{comment.content}</p>
                 <p className="text-sm text-gray-500">
-                  Posted by {comment.profiles?.username || comment.guest_name || 'Guest'} on{' '}
-                  {new Date(comment.created_at).toLocaleString()}
+                  Posted by {comment.profiles?.username || comment.guest_name || 'Guest'} {' '}
+                  {formatTimestamp(comment.created_at)}
                 </p>
+
 
                 <button
                   onClick={() => setReplyingTo(comment.id)}
@@ -421,7 +457,7 @@ export default function CommentSection() {
                       <p>{reply.content}</p>
                       <p className="text-sm text-gray-500">
                         Replied by {reply.profiles?.username || reply.guest_name || 'Guest'} on{' '}
-                        {new Date(reply.created_at).toLocaleString()}
+                        {formatTimestamp(comment.created_at)}
                       </p>
                     </div>
                   ))}
