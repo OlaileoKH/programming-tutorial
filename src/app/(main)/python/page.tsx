@@ -244,7 +244,7 @@ print(f"After swapping: a = {a}, b = {b}")`}
       <hr className="my-4 border-t border-gray-500" />
       </ExpandableSection>
 
-        <ExpandableSection title='Control Structures and Functions'>
+        <ExpandableSection title='Control Structures and Functions '>
           <></>
         </ExpandableSection>
         </ul>
