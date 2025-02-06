@@ -10,7 +10,10 @@ export default function RootLayout({
 }) {const title = 'Programming with Olaileo'; // Default title
   return (
     <html lang="en">
-      <head><title>Programming with Olaileo</title></head>
+      <head>
+      <link rel="icon" href="/OK.ico" />
+
+        <title>Programming with Olaileo</title></head>
       <body>
     <Header title={title}></Header>
     <br></br>

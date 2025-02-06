@@ -18,10 +18,10 @@ export default function Header({ title }: { title: string }) {
     {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
   </button>
   {isMenuOpen && (
-    <nav className="md:hidden text-center space-y-4 py-4">
-        <Link href="/" className="text-white hover:text-black transition duration-300 ease-in-out block py-2">Home</Link>
-        <Link href="/cpp" className="text-white hover:text-black transition duration-300 ease-in-out block py-2">C++</Link>
-        <Link href="/python" className="text-white hover:text-black transition duration-300 ease-in-out block py-2">Python</Link>
+    <nav className="md:hidden ml-6 text-center space-y-4 py-4">
+        <Link href="/" >Home</Link>
+        <Link href="/cpp" >C++</Link>
+        <Link href="/python" >Python</Link>
     </nav>
   )}
 </header>

@@ -241,9 +241,9 @@ const formatTimestamp = (timestamp?: string) => {
   }, []);
 
   return (
-  <div className="ml-12 mr-12">
+  <div className="ml-24 mr-24">
     <div className="mt-8">
-      <h2 className="text-xl font-bold mb-4">Community Discussion</h2>
+      <h2 className="text-xl font-bold mb-4">Lets Discuss</h2>
       <div className="mb-4">
         <label className="block mb-2">
           <input

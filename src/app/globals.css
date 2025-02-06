@@ -44,4 +44,15 @@ body {
     z-index: 1000;
   }
 
-  
+/* In your CSS file */
+/* .sub.text {
+  font-size: 3xl;
+  font-weight: bold;
+  color: orange-500;
+  transition: all 300ms ease-in-out;
+}
+
+.sub-text:hover {
+  color: black;
+  transform: translateX(4px) scale(1.1);
+} */

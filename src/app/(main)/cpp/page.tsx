@@ -2,10 +2,18 @@ import GoToTopButton from '@/components/button';
 import CodeBlock from '@/components/CodeBlock';
 import ExpandableSection from '@/components/ExpandableSection';
 import CommentSection from '@/components/CommentSection';
+import CodeEditor from '@/components/CodeEditor';
+
 export default function CppPage() {
   return (
+    
     <div className="text-black font-mono">
- 
+        
+     <div className="container mx-auto p-4">
+        <ExpandableSection title="C++ Code Editor (You can edit your code here....)">
+            <CodeEditor /></ExpandableSection>
+        </div>
+    
         {/* <CodeBlock
         language="cpp"
         code={`#include <iostream>
@@ -18,14 +26,17 @@ export default function CppPage() {
         /> */}
         
         <ul className="ml-12 mr-20 list-disc">
-        <h1 className="text-2xl font-bold mb-4">C++ Tutorial</h1>
+        <h1 className="text-2xl font-bold mb-4 flex justify-center items-center">C++ Tutorial Series</h1>
       {/* <p className="">Welcome to the C++ tutorial section. Here you will learn the basics of C++ programming.</p> */}
       <br></br>
+
+      {/* Introduction */}
     <ExpandableSection title="Introduction to Programming and C++">
       
         {/* <h1 className="text-2xl  font-bold mb-4">Module 1:</h1> */}
         <hr className="my-4 border-t border-gray-500" />
-
+        <div className="text-xl"> Since we are new to programming, it’s important to start with the basics and gradually build up their understanding. Here’s a structured approach to teaching C++:</div>
+        <hr className="my-4 border-t border-gray-500" />
         <h1 className="text-2xl  font-bold mb-4">1.What is Programming?</h1>
         <ul className="ml-12 list-disc">
         <li className=" text-xl  mb-4"><b>Definition:</b> Programming is the process of giving instructions to a computer to perform specific tasks.</li>
@@ -216,7 +227,13 @@ export default function CppPage() {
         <hr className="my-4 border-t border-gray-500" /> 
     </ExpandableSection>
     
+    {/* Variables */}
     <ExpandableSection title="Variables, data types, and basic input/output.">
+    <hr className="my-4 border-t border-gray-500" />
+    <div className="text-xl">
+    We’ll focus on variables, data types, and basic input/output in C++. These are the building blocks of any program, and understanding them is crucial for writing meaningful code.
+    </div>
+    <hr className="my-4 border-t border-gray-500" />
         <h1 className="text-2xl  font-bold mb-4">1. Variables</h1>
         <ul className="ml-12 list-disc">
             <li className="text-xl  mb-4"><b>What is a Variable?</b>
@@ -403,10 +420,251 @@ int main() {
             </div>
             </ul>
             <hr className="my-4 border-t border-gray-500" /> 
-    </ExpandableSection> 
+    </ExpandableSection>
+
+    {/* Operators and Expressions */}
+    <ExpandableSection title="Operators and Expressions.">
+    <hr className="my-4 border-t border-gray-500" />
+        <div className="text-xl">    
+            We’ll focus on operators and expressions in C++. Operators are symbols that perform operations on variables and values, and expressions combine variables, constants, and operators to produce a result.
+        </div>
+        <hr className="my-4 border-t border-gray-500" />
+        <h1 className="text-2xl  mb-4"><b>1. Types of Operators</b></h1>
+        <div className="text-xl">C++ has several types of operators. We’ll focus on the most commonly used ones:</div>
+            <ul className="ml-16 mr-12 list-decimal">
+            <div className=" mb-2 text-xl">
+                <li><b>Arithmetic Operators:</b> Perform mathematical operations.</li>
+                <li><b>Relational Operators:</b> Compare two values.</li>
+                <li><b>Logical Operators:</b> Combine multiple conditions.</li>
+                <li><b>Assignment Operators:</b> Assign values to variables.</li>
+            </div>
+            </ul>
+            <hr className="my-4 border-t border-gray-500" />
+
+            <h1 className="text-2xl  font-bold mb-4">2. Arithmetic Operators</h1>
+        <ul className="ml-12 list-disc">
+            <li className="text-xl  mb-4"><b>Used for basic mathematical calculations.</b></li>
+            <li className="text-xl  mb-4"><b>Operators:</b>
+                <ul className="ml-12 list-non">
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">+ (Addition)</li>
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">- (Subtraction)</li>
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">* (Multiplication)</li>
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">/ (Division)</li>
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">% (Modulus – remainder after division)</li>
+                </ul>
+            <li className="text-xl  mb-4"><b>Example</b>
+            <CodeBlock
+        language="cpp"
+        code={`int a = 10, b = 3;
+cout << "a + b = " << (a + b) << endl; // 13
+cout << "a - b = " << (a - b) << endl; // 7
+cout << "a * b = " << (a * b) << endl; // 30
+cout << "a / b = " << (a / b) << endl; // 3 (integer division)
+cout << "a % b = " << (a % b) << endl; // 1 (remainder)`}
+        /> 
+            </li>
+        </li></ul>
+
+        
+
+        <hr className="my-4 border-t border-gray-500" />
+
+        <h1 className="text-2xl  font-bold mb-4">3. Relational Operators</h1>
+        <ul className="ml-12 list-disc">
+            <li className="text-xl  mb-4"><b>Used to compare two values.</b></li>
+            <li className="text-xl  mb-4"><b>Operators:</b>
+                <ul className="ml-12 list-non">
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">== (Equal to)</li>
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">!= (Not equal to)</li>
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">&gt; (Greater than)</li>
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">&lt; (Less than)</li>
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">&gt;= (Greater than or equal to)</li>
+                <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">&lt;= (Less than or equal to)</li>
+                </ul>
+            <li className="text-xl  mb-4"><b>Example</b>
+            <CodeBlock
+        language="cpp"
+        code={`int x = 5, y = 10;
+cout << (x == y) << endl; // 0 (false)
+cout << (x != y) << endl; // 1 (true)
+cout << (x > y) << endl;  // 0 (false)
+cout << (x < y) << endl;  // 1 (true)
+cout << (x >= y) << endl; // 0 (false)
+cout << (x <= y) << endl; // 1 (true)`}
+        /> 
+            </li>
+        </li></ul>
+        <hr className="my-4 border-t border-gray-500" />
+
+                <h1 className="text-2xl  font-bold mb-4">4. Logical Operators</h1>
+                <ul className="ml-12 list-disc">
+                    <li className="text-xl  mb-4"><b>Used to combine multiple conditions.</b></li>
+                    <li className="text-xl  mb-4"><b>Operators:</b>
+                        <ul className="ml-12 list-non">
+                        <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">&& (Logical AND) – True if both conditions are true.</li>
+                        <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">|| (Logical OR) – True if at least one condition is true.</li>
+                        <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">! (Logical NOT) – Reverses the condition.</li>
+                        </ul>
+                    <li className="text-xl  mb-4"><b>Example</b>
+                    <CodeBlock
+                language="cpp"
+                code={`int x = 5, y = 10;
+cout << (x == y) << endl; // 0 (false)
+cout << (x != y) << endl; // 1 (true)
+cout << (x > y) << endl;  // 0 (false)
+cout << (x < y) << endl;  // 1 (true)
+cout << (x >= y) << endl; // 0 (false)
+cout << (x <= y) << endl; // 1 (true)`}
+                /> 
+                    </li>
+                </li></ul>
+        <hr className="my-4 border-t border-gray-500" />
+
+                <h1 className="text-2xl  font-bold mb-4">5. Assignment Operators</h1>
+                <ul className="ml-12 list-disc">
+                    <li className="text-xl  mb-4"><b>Used to assign values to variables.</b></li>
+                    <li className="text-xl  mb-4"><b>Operators:</b>
+                        <ul className="ml-12 list-non">
+                        <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">= (Assign)</li>
+                        <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">+= (Add and assign)</li>
+                        <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">-= (Subtract and assign)</li>
+                        <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">*= (Multiply and assign)</li>
+                        <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">/= (Divide and assign)</li>
+                        <li className=" relative pl-4 before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-transparent before:border before:border-gray-500 before:rounded-full">%= (Modulus and assign)</li>
+                        
+                        </ul>
+                    <li className="text-xl  mb-4"><b>Example</b>
+    <CodeBlock
+language="cpp"
+code={`int a = 5;
+a += 3; // a = a + 3 (a becomes 8)
+a -= 2; // a = a - 2 (a becomes 6)
+a *= 4; // a = a * 4 (a becomes 24)
+a /= 3; // a = a / 3 (a becomes 8)
+a %= 5; // a = a % 5 (a becomes 3)`}
+/> 
+    </li>
+</li></ul>
+            <hr className="my-4 border-t border-gray-500" />
+
+            <h1 className="text-2xl  font-bold mb-4">6. Writing a Program Using Operators</h1>
+            <div className="text-xl">Let’s write a program to calculate the area and perimeter of a rectangle.</div>
+            <CodeBlock
+language="cpp"
+code={`#include <iostream>
+using namespace std;
+
+int main() {
+    float length, width;
+    cout << "Enter length and width of the rectangle: ";
+    cin >> length >> width;
+
+    float area = length * width;
+    float perimeter = 2 * (length + width);
+
+    cout << "Area: " << area << endl;
+    cout << "Perimeter: " << perimeter << endl;
+
+    return 0;
+}`}
+/>
+
+        <hr className="my-4 border-t border-gray-500" />
+
+        <h1 className="text-2xl  font-bold mb-4">7. Practice Exercises</h1>
+        <ul className="ml-16 mr-12 list-decimal">
+            <div className=" mb-2 text-xl">
+                <li><b>Exercise 1:</b> Write a program to check if a number is even or odd.
+                <CodeBlock
+language="cpp"
+code={`#include <iostream>
+using namespace std;
+
+int main() {
+    int num;
+    cout << "Enter a number: ";
+    cin >> num;
+
+    if (num % 2 == 0) {
+        cout << num << " is even." << endl;
+    } else {
+        cout << num << " is odd." << endl;
+    }
+
+    return 0;
+}`}
+/>
+                </li>
+                <li><b>Exercise 2:</b> Write a program to find the largest of three numbers.
+                <CodeBlock
+language="cpp"
+code={`#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b, c;
+    cout << "Enter three numbers: ";
+    cin >> a >> b >> c;
+
+    int largest = a;
+    if (b > largest) largest = b;
+    if (c > largest) largest = c;
+
+    cout << "Largest number: " << largest << endl;
+    return 0;
+}`}
+/>
+                </li>
+                <li><b>Exercise 3:</b> Write a program to calculate the sum of digits of a number.
+                <CodeBlock
+language="cpp"
+code={`#include <iostream>
+using namespace std;
+
+int main() {
+    int num, sum = 0;
+    cout << "Enter a number: ";
+    cin >> num;
+
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
+    }
+
+    cout << "Sum of digits: " << sum << endl;
+    return 0;
+}`}
+/>
+                </li>
+            </div>
+            </ul>
+
+            <hr className="my-4 border-t border-gray-500" />
+
+            <h1 className="text-2xl  font-bold mb-4">8. Key Takeaways</h1>
+            <ul className="ml-12 list-disc">
+            <li className="text-xl  mb-4">Operators are used to perform operations on variables and values.</li>
+            <li className="text-xl  mb-4">Arithmetic operators perform mathematical calculations.</li>
+            <li className="text-xl  mb-4">Relational operators compare two values.</li>
+            <li className="text-xl  mb-4">Logical operators combine multiple conditions.</li>
+            <li className="text-xl  mb-4">Assignment operators assign values to variables.</li>
+            </ul>
+
+            <hr className="my-4 border-t border-gray-500" />
+
+            <h1 className="text-2xl  font-bold mb-4">Homeworks</h1>
+            <ul className="ml-16 list-decimal">
+            <li className="text-xl  mb-4">Write a program to calculate the factorial of a number.</li>
+            <li className="text-xl  mb-4">Write a program to check if a number is positive, negative, or zero.</li>
+            <li className="text-xl  mb-4">Experiment with different operators and see how they work.</li>
+            </ul>
+
+            <hr className="my-4 border-t border-gray-500" />
+
+    </ExpandableSection>
     <GoToTopButton />
     </ul> 
-
+    <br></br>
      <div>
       {/* Your existing content */}
       <CommentSection />
