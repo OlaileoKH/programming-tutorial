@@ -56,3 +56,21 @@ body {
   color: black;
   transform: translateX(4px) scale(1.1);
 } */
+.hollow-disc {
+  list-style-type: none;
+  padding-left: 20px;
+  position: relative;
+}
+
+.hollow-disc::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 50%;
+  position: absolute;
+  left: 5px;
+  top: 9px;
+}
+
