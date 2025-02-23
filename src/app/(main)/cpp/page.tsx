@@ -25,7 +25,7 @@ export default function CppPage() {
         }`}
         /> */}
         
-        <ul className="ml-12 mr-20 list-disc">
+        
         <h1 className="text-2xl font-bold mb-4 flex justify-center items-center">C++ Tutorial Series</h1>
       {/* <p className="">Welcome to the C++ tutorial section. Here you will learn the basics of C++ programming.</p> */}
       <br></br>
@@ -38,34 +38,34 @@ export default function CppPage() {
         <div className="text-lg"> Since we are new to programming, it’s important to start with the basics and gradually build up their understanding. Here’s a structured approach to teaching C++:</div>
         <hr className="my-4 border-t border-gray-500" />
         <h1 className="text-2xl  font-bold mb-4">1.What is Programming?</h1>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-10 list-disc">
         <li className=" text-lg  mb-4"><b>Definition:</b> Programming is the process of giving instructions to a computer to perform specific tasks.</li>
         
-        <li className="text-lg  mb-4"><b>Why Learn Programming?</b>
-            <ul className="ml-12 list-disc">
-            <li className=" mb-2">Essential for solving engineering problems (e.g., simulations, data analysis, automation).</li>
-            <li className=" ">C++ is widely used in software development, game development, and embedded systems.</li>
+        <li className="text-lg mb-4"><b>Why Learn Programming?</b>
+            <ul className="ml-6 list-disc">
+            <li className="hollow-disc ">Essential for solving engineering problems (e.g., simulations, data analysis, automation).</li>
+            <li className="hollow-disc ">C++ is widely used in software development, game development, and embedded systems.</li>
             </ul>
         </li></ul>
 
         <hr className="my-4 border-t border-gray-500" />
 
         <h1 className="text-2xl  mb-4"><b>2. Setting Up the Environment</b></h1>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-6 list-disc">
         <li className=" text-lg  mb-4"><b>Step 1: Install a C++ Compiler</b>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-10 list-disc">
             <li className=" mb-2"><b>Windows:</b> Install MinGW or use an IDE like Code::Blocks or Dev-C++.</li>
-            <li className=" ">Mac/Linux: GCC or Clang is usually pre-installed. If not, install it using the terminal:
-                <ul className="ml-12 list-disc">
-                <li className=" mb-2">Mac: brew install gcc</li>
-                <li className=" ">Linux: sudo apt install g++</li>
+            <li className=" "><b>Mac/Linux:</b> GCC or Clang is usually pre-installed. If not, install it using the terminal:
+                <ul className="ml-6 list-disc mb-4">
+                <li className="  hollow-disc">Mac: brew install gcc</li>
+                <li className=" hollow-disc">Linux: sudo apt install g++</li>
                 </ul>
             </li>
             </ul>
         </li>
         
         <li className="text-lg  mb-4"><b>Step 2: Choose an IDE or Text Editor</b>
-            <ul className="ml-12 list-disc">
+            <ul className="ml-10 list-disc">
             <li className=" mb-2">
                 <b>IDE:</b> Code::Blocks, Visual Studio, or Dev-C++ (recommended for beginners).
                 </li>
@@ -78,7 +78,7 @@ export default function CppPage() {
 
         <h1 className="text-2xl  mb-4"><b>3. Writing Your First C++ Program</b></h1>
         <div className="text-lg">
-            <ul className="ml-12 list-disc">
+            <ul className="ml-10 list-disc">
             <li className=" mb-2">
                 <b>Program Objective:</b> Display &quot;Hello, World!&quot; on the screen.
                 </li>
@@ -87,12 +87,12 @@ export default function CppPage() {
             <CodeBlock
         language="cpp"
         code={`#include <iostream> // Header file for input/output operations
-            using namespace std; // Avoids writing std:: before cout and endl
+using namespace std; // Avoids writing std:: before cout and endl
 
-            int main() { // Main function where execution begins
-                cout << "Hello, World!" << endl; // Print "Hello, World!" to the console
-                return 0; // Indicates successful program termination
-            }`}
+int main() { // Main function where execution begins
+cout << "Hello, World!" << endl; // Print "Hello, World!" to the console
+return 0; // Indicates successful program termination
+}`}
         />
             </ul>
         </div>
@@ -100,28 +100,28 @@ export default function CppPage() {
 
         <h1 className="text-2xl  mb-4"><b>4. Breaking Down the Code</b></h1>
         <div className="text-lg">
-            <ul className="ml-12 list-disc "><b>1. #include</b> &lt;iostream&gt;
+            <ul className="ml-10 list-disc "><b>1. #include</b> &lt;iostream&gt;
             <ul>
                 <li className=" mb-2">This line includes the <b>input-output stream library</b>, which allows us to use cout and cin.</li>
             </ul></ul>
-            <ul className="ml-12 list-disc "><b>2. using namespace std;</b>
+            <ul className="ml-10 list-disc "><b>2. using namespace std;</b>
             <ul>
                 <li className=" mb-2">This line tells the compiler to use the <b>standard namespace</b>, so we don’t have to write std::cout or std::endl.</li>
             </ul></ul>
-            <ul className="ml-12 list-disc "><b>3. int main() {}</b>
+            <ul className="ml-10 list-disc "><b>3. int main() {}</b>
             <ul>
             <li className=" mb-2">Every C++ program must have a main() function. Execution starts here.</li>
             </ul></ul>
-            <ul className="ml-12 list-disc "><b>4. cout</b>  &quot;Hello, World!&quot; &lt;&lt; <b>endl</b>;
+            <ul className="ml-10 list-disc "><b>4. cout</b>  &quot;Hello, World!&quot; &lt;&lt; <b>endl</b>;
 
-            <ul className="ml-12 list-disc">
+            <ul className="ml-10 list-disc">
                 <div className=" mb-2">
                     <li><b>cout</b> is used to print text to the console.</li>
                     <li><b>&lt;&lt; </b>  is the insertion operator.</li>
                     <li><b>endl</b>  inserts a newline character.</li>
                 </div></ul></ul>
-            <ul className="ml-12 list-disc "><b>5. return 0;</b>
-            <ul className="ml-12 list-disc">
+            <ul className="ml-10 list-disc "><b>5. return 0;</b>
+            <ul className="ml-10 list-disc">
             <li className=" mb-2">Indicates that the program executed successfully.</li>
             </ul></ul>
         </div>
@@ -129,35 +129,35 @@ export default function CppPage() {
         
         <h1 className="text-2xl  mb-4"><b>5. Compiling and Running the Program</b></h1>
         <div className="text-lg">
-        <ul className="ml-12 list-disc">
+        <ul className="ml-10 list-disc">
         <li className="mb-4"><b>Step 1:</b>Save the file with a .cpp extension (e.g., hello.cpp).</li>
         <li className="mb-4"><b>Step 2:</b> Compile the program using a compiler:
-        <ul className="ml-12 list-disc">
-            <li className=" mb-2"><b>Command Line</b> </li>
+        <ul className="ml-8 list-disc">
+            <li className="mb-4 hollow-disc"><b>Command Line</b> </li>
             <CodeBlock
         language="python"
         code={`g++ hello.cpp -o hello`}
         />
-            <li className=" mb-2"><b>IDE:</b> Click the &quot;Build&quot; or &quot;Run&quot; button.</li>
+            <li className=" mb-4 hollow-disc"><b>IDE:</b> Click the &quot;Build&quot; or &quot;Run&quot; button.</li>
             </ul>
         </li>
         <li className="mb-4"><b>Step 3:</b> Run the program:
-        <ul className="ml-12 list-disc">
-            <li className=" mb-2"><b>Command Line</b> </li>
+        <ul className="ml-8 list-disc">
+            <li className=" mb-4 hollow-disc"><b>Command Line</b> </li>
             <CodeBlock
         language="python"
         code={`./hello`}
         />
-            <li className=" mb-2"><b>IDE:</b> Click the &quot;Run&quot; button.</li>
+            <li className=" mb-4 hollow-disc"><b>IDE:</b> Click the &quot;Run&quot; button.</li>
             </ul>
         </li>
         <li className="  mb-4"><b>Output:</b>
-        <ul className="ml-12 list-disc">
+        <ul className=" mb-4 ml-8 list-disc">
             <CodeBlock
         language="python"
         code={`Hello, World!`}
         />
-            <li className=" mb-2"><b>IDE:</b> Click the &quot;Run&quot; button.</li>
+            <li className=" mb-2 hollow-disc"><b>IDE:</b> Click the &quot;Run&quot; button.</li>
             </ul>
         </li></ul>
         </div>
@@ -168,7 +168,7 @@ export default function CppPage() {
         
         <h1 className="text-2xl  mb-4"><b>6. Practice Exercise</b></h1>
         <div className="text-lg">    
-            <ul className="ml-12 list-disc">
+            <ul className="ml-10 list-disc">
             <li className=" mb-2">
             Modify the program to print your name instead of  &quot;Hello, World!&quot; .
                 </li>
@@ -177,12 +177,12 @@ export default function CppPage() {
             <CodeBlock
         language="cpp"
         code={`#include <iostream>
-            using namespace std;
+ using namespace std;
 
-            int main() {
-                cout << "My name is [Your Name]!" << endl;
-                return 0;
-            }`}
+ int main() {
+ cout << "My name is [Your Name]!" << endl;
+ return 0;
+}`}
         />
             </ul>
 
@@ -191,7 +191,7 @@ export default function CppPage() {
 
         <h1 className="text-2xl  mb-4"><b>7. Key Takeaways for Day 1</b></h1>
         <div className="text-lg">
-            <ul className="ml-12 list-disc">
+            <ul className="ml-10 list-disc">
             <div className=" mb-2">
                 <li>Programming is about giving instructions to a computer.</li>
                 <li>C++ programs start execution from the<b>main()</b>  function.</li>
@@ -205,18 +205,18 @@ export default function CppPage() {
         
         <h1 className="text-2xl  mb-4"><b>Homework</b></h1>
         <div className="text-lg">
-        <ul className="ml-12 list-disc">
+        <ul className="ml-8 list-disc">
         <ul className=" mb-2">
             1. Write a program to print your name, age, and favorite subject.
                 </ul>
-        <ul className="ml-12 list-disc">
+        <ul className="ml-10 list-disc">
             <li className=" "><b>Example Output:</b> </li>
             <CodeBlock
         language="cpp"
         code={`
-            Name: Alice 
-            Age: 20
-            Favorite Subject: Math`}
+  Name: Alice 
+  Age: 20
+  Favorite Subject: Math`}
         /></ul>
         <ul className=" mb-2">
             2. Experiment with cout to print multiple lines of text.
@@ -916,7 +916,7 @@ int main() {
     </ul>
     </ExpandableSection>
     <GoToTopButton />
-    </ul> 
+ 
     <br></br>
      <div>
       {/* Your existing content */}

@@ -248,7 +248,7 @@ print(f"After swapping: a = {a}, b = {b}")`}
 
         <ExpandableSection title='Control Structures and Functions '>
         <hr className="my-4 border-t border-gray-500" />
-        <div className="text-xl">We’ll build on the basics and introduce control structures (if-else statements and loops) and functions. These are essential concepts for writing more complex and logical programs.</div>
+        We’ll build on the basics and introduce control structures (if-else statements and loops) and functions. These are essential concepts for writing more complex and logical programs.
         <hr className="my-4 border-t border-gray-500" />
         <h1 className="text-2xl  mb-4"><b>1. Recap</b></h1>
         <ul className="text-lg list-disc">
@@ -428,8 +428,31 @@ fibonacci(10)  # Output: 0 1 1 2 3 5 8 13 21 34`}
 
         <ExpandableSection title='Data Structures in Python'>
         <hr className="my-4 border-t border-gray-500" />
-        <h1 className="text-2xl mb-4">1. Introduction to Data Structures</h1>
+        <h1 className="text-2xl mb-4"><b>1. Introduction to Data Structures</b></h1>
+        <div className="mb-4">We’ll introduce data structures in Python, which are essential for organizing and manipulating collections of data. We’ll focus on lists, tuples, dictionaries, and sets. These are foundational concepts that will help work with more complex data in engineering applications.
+        </div>
+        <ul className="text-lg mb-4 list-disc">
+          <li className="ml-10">Python has built-in data structures like <b>lists</b>, <b>tuples</b>, <b>dictionaries</b>, and <b>sets.</b></li>
+          <li className="ml-10 mb-4">Each data structure has its own use case:
+            <ul className="list-none">
+              <li className="ml-10 hollow-disc"><b>Lists:</b> Ordered, mutable collections.</li>
+              <li className="ml-10 hollow-disc"><b>Tuples:</b> Ordered, immutable collections.</li>
+              <li className="ml-10 hollow-disc"><b>Dictionaries:</b> Key-value pairs.</li>
+              <li className="ml-10 hollow-disc"><b>Sets:</b> Unordered collections of unique elements.</li>
+            </ul>
+          </li>
+        </ul>
         
+        <hr className="my-4 border-t border-gray-500" />
+        <h1 className="text-2xl mb-4"><b>3. Lists</b></h1>
+        <div className="mb-4">Lists are one of the most commonly used data structures in Python. They are ordered and mutable.</div>
+        <h1 className="text-xl mb-4"><b>A. Creating Lists</b></h1>
+        <li className="mb-4 ml-10 list-disc">Syntax
+        <CodeBlock
+        language="python"
+        code={`my_list = [1, 2, 3, 4, 5]`}
+        />
+        </li>
         </ExpandableSection>
         <GoToTopButton />
         

@@ -9,19 +9,27 @@ export default function Header({ title }: { title: string }) {
   <h1 className="text-3xl font-bold">{title}</h1>
   <nav className="hidden md:flex space-x-7">
     
-      <Link href="/" className="text-white hover:text-black transition duration-300 ease-in-out">Home</Link>
-      <Link href="/cpp" className="text-white hover:text-black transition duration-300 ease-in-out">C++</Link>
-      <Link href="/python" className="text-white hover:text-black transition duration-300 ease-in-out">Python</Link>
+      <Link href="/" className="text-lg text-white hover:text-black transition duration-300 ease-in-out">Home</Link>
+      <Link href="/cpp" className="text-lg text-white hover:text-black transition duration-300 ease-in-out">C++</Link>
+      <Link href="/python" className="text-lg text-white hover:text-black transition duration-300 ease-in-out">Python</Link>
     
   </nav>
   <button className="md:hidden focus:outline-none hover:text-black transition duration-300 ease-in-out" onClick={() => setIsMenuOpen(!isMenuOpen)}>
     {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
   </button>
   {isMenuOpen && (
-    <nav className="md:hidden ml-6 text-center space-y-4 py-4">
-        <Link href="/" >Home</Link>
-        <Link href="/cpp" >C++</Link>
-        <Link href="/python" >Python</Link>
+    <nav className="md:hidden ml-4 text-center space-y-4 py-4">
+    <ul className="list-none text-lg">
+      <li>
+        <Link href="/">Home</Link>
+      </li>
+      <li>
+        <Link href="/cpp">C++</Link>
+      </li>
+      <li>
+        <Link href="/python">Python</Link>
+      </li>
+    </ul>
     </nav>
   )}
 </header>
