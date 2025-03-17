@@ -20,24 +20,27 @@ int main() {
     setOutput('');
 
     try {
-      const response = await fetch('/api/comments/route', {
+      const response = await fetch('/api/execute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ action: 'execute', code }),
+        body: JSON.stringify({ code }),
       });
 
       const result = await response.json();
+
       if (result.error) {
+        // Handle API errors
         setOutput(`Error: ${result.error}`);
       } else {
-        setOutput(result.stdout || result.stderr || result.compile_output);
+        // Display the output or error messages
+        const outputMessage = result.output || result.error || 'No output';
+        setOutput(outputMessage);
       }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      // setOutput('Failed to execute code. Please try again.');
-      setOutput('Comming Soon........');
+      // Handle network or unexpected errors
+      setOutput(`Failed to execute code: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsLoading(false);
     }
