@@ -13,8 +13,7 @@ export default function Home() {
       <ul className="list-none pl-0 mt-2 space-y-4">
         <li className="ml-24">
           <a href="/cpp"
-            className="text-3xl font-bold text-orange-500 hover:text-black transition-all duration-300 ease-in-out block mb-6 font-serif transform hover:translate-x-4 hover:scale-110"
-          >
+            className="text-3xl font-bold text-orange-500 hover:text-black transition-all duration-300 ease-in-out block mb-6 font-serif transform hover:translate-x-4 hover:scale-110">
             C++
           </a>
         </li>

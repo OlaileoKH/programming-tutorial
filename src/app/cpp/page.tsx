@@ -1,14 +1,40 @@
+'use client';
+
 import GoToTopButton from '@/components/button';
 import CodeBlock from '@/components/CodeBlock';
 import ExpandableSection from '@/components/ExpandableSection';
 import CommentSection from '@/components/CommentSection';
 import CodeEditor from '@/components/CodeEditor';
+import { useAuth } from '@/app/context/AuthContext';
+import { useRouter } from 'next/navigation';
+import '@/app/globals.css';
 
 export default function CppPage() {
+    const { user, signOut } = useAuth();
+    const router = useRouter();
+
+    const handleCommentClick = () => {
+        if (!user) {
+            alert('Please log in to comment.'); // Show a login prompt
+            router.push('/login'); // Redirect to the login page
+        }
+    };
   return (
     
     <div className="text-black font-mono">
-        
+        {user ? (
+                    <>
+                        <p>Welcome, {user.email}!</p>
+                        <button
+                            onClick={signOut}
+                            className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+                        >
+                            Sign Out
+                        </button>
+                    </>
+                ) : (
+                    <p>Welcome, guest! Please log in to comment.</p>
+                )}
      <div className="container mx-auto p-4">
         <ExpandableSection title="C++ Code Editor (You can edit your code here....)">
             <CodeEditor /></ExpandableSection>
@@ -919,8 +945,8 @@ int main() {
  
     <br></br>
      <div>
-      {/* Your existing content */}
-      <CommentSection />
+
+      <CommentSection user={user} onCommentClick={handleCommentClick} />
     </div>
 </div>
 
